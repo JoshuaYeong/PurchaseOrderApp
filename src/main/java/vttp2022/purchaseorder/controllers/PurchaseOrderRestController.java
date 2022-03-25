@@ -58,12 +58,14 @@ public class PurchaseOrderRestController {
         System.out.println(">>>>> keys: " + hMap);
         Float unitPrice = quote.getQuotation(key);
         Integer total = (int) (value * unitPrice);
+        Float totalPrice = total.floatValue();
+        totalPrice = 0.00f;
 
         String name = obj.getString("name");
         JsonObject jsonObject = Json.createObjectBuilder()
             .add("invoiceId", quote.getQuoteId())
             .add("name", name)
-            .add("total", total.floatValue())
+            .add("total", totalPrice)
             .build();
 
         return ResponseEntity.ok().body(jsonObject.toString());
